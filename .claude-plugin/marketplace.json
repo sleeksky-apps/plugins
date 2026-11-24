@@ -1,0 +1,13 @@
+{
+  "name": "sleeksky",
+  "owner": { "name": "SleekSky" },
+  "metadata": { "description": "Build, run and publish apps on the SleekSky platform." },
+  "plugins": [
+    {
+      "name": "sleeksky",
+      "source": "./plugins/sleeksky",
+      "description": "Start, build, check and publish SleekSky apps: the manifest, runtime rules, platform sign-in and the sleeksky CLI.",
+      "category": "development"
+    }
+  ]
+}

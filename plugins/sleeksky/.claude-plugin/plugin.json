@@ -1,0 +1,9 @@
+{
+  "name": "sleeksky",
+  "version": "0.1.0",
+  "description": "Start, build, check and publish SleekSky apps: the manifest, runtime rules, platform sign-in and the sleeksky CLI.",
+  "author": { "name": "SleekSky" },
+  "homepage": "https://apps.sleeksky.com/docs",
+  "repository": "https://github.com/sleeksky-apps/plugins",
+  "keywords": ["sleeksky", "cloudflare", "workers"]
+}
