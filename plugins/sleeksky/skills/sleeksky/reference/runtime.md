@@ -54,6 +54,6 @@ Optional `prompt=login` (always show the form) and `login_hint` (prefill email) 
 | Endpoint | What |
 |---|---|
 | `GET /_health` | `200 {"ok":true}` once the database answers. Checked after every deploy; failure rolls back. |
-| each `schedules[].path` | `POST` on schedule, aligned to the clock. Idempotent. Only the platform can reach `/_platform/*`, so no token check. |
+| each `schedules[].path` | `POST` on schedule, aligned to the clock. Idempotent. Only the platform can reach `/_sky/*`, so no token check. |
 
 For work more often than every 15 minutes, use a Durable Object alarm and re-arm it from a schedule.

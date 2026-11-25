@@ -27,7 +27,7 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 
 1. Add `sleeksky.json` at the repo root (smallest valid one is in the manifest reference).
 2. Remove `routes`, `triggers` (cron), `workers_dev` and service bindings from the Wrangler config. Turn crons into
-   `schedules` with `/_platform/...` paths; turn hard-coded API keys into manifest `secrets` or platform `services`.
+   `schedules` with `/_sky/...` paths; turn hard-coded API keys into manifest `secrets` or platform `services`.
 3. Keep it running on its own: platform behaviour only when **both** `env.APP_ID` and `env.SKY` are set.
 4. Serve `GET /_health` (200 once the database answers) and each schedule path (`POST`, idempotent).
 5. Move the schema into additive `migrations/*.sql`.
@@ -45,7 +45,7 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 - When init says `"storage": "over"`, refuse writes that grow storage and point owners to the console.
 - Never check for updates, show prices for the app itself, bill customers yourself, store customers' secrets in
   plain text, or fetch hosts outside the manifest's `egress`.
-- `/_health` and `/_platform/*` are reserved. The platform calls nothing else on your app.
+- `/_health` and `/_sky/*` are reserved. The platform calls nothing else on your app.
 
 ## Check before publishing
 

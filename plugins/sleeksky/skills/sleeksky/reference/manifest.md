@@ -40,7 +40,7 @@ set up or deploy apps. Live reference: `<console>/docs/manifest`.
 | `egress` | `"any"` or a list of hosts (`api.example.com`, `*.example.com`) the app may fetch. |
 | `edge_cache` | `true` to let the platform cache responses that send `Cache-Control: public, s-maxage=N`. |
 | `payments` | `"none"` or `"connect"` (customers connect their own payment account). |
-| `schedules` | List of `{ "every", "path" }`: `every` in `m`/`h`/`d`, a multiple of 15m; `path` under `/_platform/`. |
+| `schedules` | List of `{ "every", "path" }`: `every` in `m`/`h`/`d`, a multiple of 15m; `path` under `/_sky/`. |
 | `clone` | Present (`{}`) lets owners clone an app: `skip_tables`, `copy_secrets`, `r2`. |
 | `install` | Who can add an app: `"public"`, `"developers"`, or `{ "domains": [...], "emails": [...] }`. |
 | `products` | How it's sold; see below. |
