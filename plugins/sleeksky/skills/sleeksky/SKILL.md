@@ -16,7 +16,7 @@ are at `<console>/docs` (default console `https://apps.sleeksky.com`; `SLEEKSKY_
 ## Start a new app
 
 ```bash
-npm create @sleeksky/app <folder>      # or: npx @sleeksky/cli create <folder> [--name "My App"] [--id my-app]
+npx @sleeksky/cli create <folder> [--name "My App"] [--id my-app]
 cd <folder> && npm install && npm run dev
 ```
 
@@ -51,14 +51,14 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 
 1. `npm run dev` works with no platform (`APP_ID` unset).
 2. The manifest is valid: the generator at `<console>/docs/manifest-generator` checks it with the platform's rules,
-   and `sleeksky publish` refuses an invalid one before anything goes live.
+   and `npx @sleeksky/cli publish` refuses an invalid one before anything goes live.
 3. Every migration is additive; the previous release still works on the new schema.
 4. Read code paths that use `SKY` once more for the both-set check.
 
 ## Publish
 
 ```bash
-SLEEKSKY_KEY=<publish key> npx sleeksky publish --version <v> --notes "First change|Second change"
+SLEEKSKY_KEY=<publish key> npx @sleeksky/cli publish --version <v> --notes "First change|Second change"
 ```
 
 - The publish key comes from the console: **Developer → Team & keys**. It's a secret: never print it, commit it, or
@@ -69,5 +69,5 @@ SLEEKSKY_KEY=<publish key> npx sleeksky publish --version <v> --notes "First cha
 - The first release, and any release whose `sleeksky.json` changes (anything but `release`), is **held for
   review**. Code-only releases roll out to customers by their update channel. A failing `/_health` rolls back.
 - Supplied secrets (manifest `secrets` of kind `supplied`), one value for every app:
-  `printf %s "$VALUE" | npx sleeksky secret set --name NAME`, `npx sleeksky secret list`,
-  `npx sleeksky secret clear --name NAME`. The value comes on standard input, never as an argument.
+  `printf %s "$VALUE" | npx @sleeksky/cli secret set --name NAME`, `npx @sleeksky/cli secret list`,
+  `npx @sleeksky/cli secret clear --name NAME`. The value comes on standard input, never as an argument.
