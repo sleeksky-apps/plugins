@@ -13,7 +13,7 @@ Live reference: `<console>/docs/runtime`, `<console>/docs/sky-api`, `<console>/d
 | `APP_PRODUCT` | The SKU it was set up from. |
 | params, resources, secrets, vars | As the approved manifest declares. |
 
-Requests arrive through the platform; the app routes its own hostnames (`<sub>.<domain>`, `<label>--<sub>.<domain>`
+Requests arrive through the platform; the app routes its own hostnames (`<sub>.<domain>`, `<sub>--<label>.<domain>`
 and verified custom domains). Visitor location is in the `x-sleeksite-geo` header (URI-encoded JSON); `request.cf`
 doesn't reach apps. CPU and subrequests per request depend on the customer's plan.
 
