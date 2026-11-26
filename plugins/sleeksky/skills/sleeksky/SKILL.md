@@ -26,9 +26,12 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 ## Make an existing Worker a SleekSky app
 
 1. Add `sleeksky.json` at the repo root (smallest valid one is in the manifest reference).
-2. Remove `routes`, `triggers` (cron), `workers_dev` and service bindings from the Wrangler config. Turn crons into
-   `schedules` with `/_sky/...` paths; turn hard-coded API keys into manifest `secrets` or platform `services`.
-3. Keep it running on its own: platform behaviour only when **both** `env.APP_ID` and `env.SKY` are set.
+2. Remove `routes`, `workers_dev` and other service bindings from the Wrangler config. Turn crons into `schedules`
+   with `/_sky/...` paths; turn hard-coded API keys into manifest `secrets` or platform `services`.
+3. Keep it running on its own with the same code: `npm install @sleeksky/sky`, `export { Sky } from
+   "@sleeksky/sky/standalone"`, wrap the default export in `withSky(app, { schedules })`, and in `wrangler.jsonc` bind
+   `SKY` to the Worker's own `Sky` entrypoint, plus a `*/15 * * * *` cron for the schedules (reference/runtime.md).
+   No `if (APP_ID && SKY)` branches: what really differs comes from init's `managed`.
 4. Serve `GET /_health` (200 once the database answers) and each schedule path (`POST`, idempotent).
 5. Move the schema into additive `migrations/*.sql`.
 6. Replace self-hosted bootstrap (setup keys, "first user is admin") with platform sign-in when `APP_ID` is set.
@@ -49,11 +52,11 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 
 ## Check before publishing
 
-1. `npm run dev` works with no platform (`APP_ID` unset).
+1. `npm run dev` works with no platform (`APP_ID` unset, `SKY` the stand-in), sign-in included.
 2. The manifest is valid: the generator at `<console>/docs/manifest-generator` checks it with the platform's rules,
    and `npx @sleeksky/cli publish` refuses an invalid one before anything goes live.
 3. Every migration is additive; the previous release still works on the new schema.
-4. Read code paths that use `SKY` once more for the both-set check.
+4. Every platform call goes over `env.SKY`; sign-in builds `` `${env.CONSOLE_URL}/auth` ``.
 
 ## Publish
 
