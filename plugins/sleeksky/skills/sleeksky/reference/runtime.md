@@ -67,7 +67,7 @@ the same calls; nothing checks `APP_ID && SKY`.
 import { sky, skyInfo } from "@sleeksky/sky";          // sky(env, path, { body }) → JSON or SkyError; skyInfo = cached init
 import { withSky } from "@sleeksky/sky/standalone";
 import manifest from "../sleeksky.json";
-export { Sky } from "@sleeksky/sky/standalone";         // or createSky({ keys, mail, name, analytics })
+export { Sky } from "@sleeksky/sky/standalone";         // or createSky({ keys, mail, name, analytics, datasets })
 export default withSky(app, { schedules: manifest.schedules, name: manifest.name });
 ```
 
