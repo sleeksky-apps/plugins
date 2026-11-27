@@ -23,6 +23,7 @@ doesn't reach apps. CPU and subrequests per request depend on the customer's pla
 |---|---|
 | `GET /api/app/init` | `{ app: {id, name, subdomain, product, account}, services, allowance, storage: "ok"\|"warn"\|"over", managed, ttl }`. Cache for `ttl` seconds (`skyInfo(env)` does). `managed`: what the platform runs (`domains`, `edge_cache`, `billing`), `[]` on its own. |
 | `POST /auth/token` | `{code, redirect}` → `{email, name, owner, staff}`. Within 60 s, once. |
+| `POST /api/app/mail/send` | Send an email as `<subdomain>--<from>@mail.sleeksky.app` (`{from?, fromName?, to, subject, text?, html?, replyTo?}`, up to 10 recipients, rate-limited). |
 | `POST /api/app/mail/signin-code` | Send a sign-in code email (rate-limited), for apps with their own sign-in. |
 | `POST /api/app/signins/remove` | `{email}`: you removed this person; drops the app from their **Your apps**. |
 | `POST /api/app/analytics/sql` | `{sql}`: one SELECT over your Analytics Engine bindings. |
