@@ -61,16 +61,20 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 ## Publish
 
 ```bash
-SLEEKSKY_KEY=<publish key> npx @sleeksky/cli publish --version <v> --notes "First change|Second change"
+npx @sleeksky/cli publish --version <v> --notes "First change|Second change"
 ```
 
-- The publish key comes from the console: **Developer → Team & keys**. It's a secret: never print it, commit it, or
-  put it in files; ask the user to export it in their shell. Don't run publish without the user asking.
+- `sleeksky.json`'s `id` is the app's id on SleekSky: the platform creates the app with it and adds the user as one
+  of its people (admin or developer). Never change `id`. A publish for an app the platform hasn't created is refused.
+- The first publish signs the user in: it prints a link and a code and opens their browser, where they sign in and
+  approve; it waits until they do. Tell the user to approve it themselves. The sign-in lasts 30 days in
+  `~/.sleeksky/credentials.json`: never read, print or copy that file. Don't run publish without the user asking.
 - Versions are `YYYY.M.N` or `MAJOR.MINOR.PATCH` and always increase. Find the last one in the console or ask.
 - Flags: `--data-note "Adds 2 tables"` (describes migrations), `--security` (forced on manual updaters after 14
   days), `--allow-destructive "<why>"` only when the user confirms a non-additive migration is safe.
-- The first release, and any release whose `sleeksky.json` changes (anything but `release`), is **held for
-  review**. Code-only releases roll out to customers by their update channel. A failing `/_health` rolls back.
+- From a developer, the first release and any release whose `sleeksky.json` changes (anything but `release`) is
+  **held for review**; from an admin of the app it's approved as it's published. Code-only releases roll out to customers by their update channel. A failing `/_health` rolls back.
 - Supplied secrets (manifest `secrets` of kind `supplied`), one value for every app:
   `printf %s "$VALUE" | npx @sleeksky/cli secret set --name NAME`, `npx @sleeksky/cli secret list`,
-  `npx @sleeksky/cli secret clear --name NAME`. The value comes on standard input, never as an argument.
+  `npx @sleeksky/cli secret clear --name NAME` (the app's admins only). The value comes on standard input, never as
+  an argument.
