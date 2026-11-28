@@ -61,7 +61,7 @@ detection. Change `id`, `name` and `products` in `sleeksky.json` first: `id` is 
 ## Publish
 
 ```bash
-npx @sleeksky/cli publish --version <v> --notes "First change|Second change"
+npx @sleeksky/cli publish --notes "First change|Second change"
 ```
 
 - `sleeksky.json`'s `id` is the app's id on SleekSky: the platform creates the app with it and adds the user as one
@@ -69,7 +69,8 @@ npx @sleeksky/cli publish --version <v> --notes "First change|Second change"
 - The first publish signs the user in: it prints a link and a code and opens their browser, where they sign in and
   approve; it waits until they do. Tell the user to approve it themselves. The sign-in lasts 30 days in
   `~/.sleeksky/credentials.json`: never read, print or copy that file. Don't run publish without the user asking.
-- Versions are `YYYY.M.N` or `MAJOR.MINOR.PATCH` and always increase. Find the last one in the console or ask.
+- It publishes `"version"` from `sleeksky.json` (`YYYY.M.N` or `MAJOR.MINOR.PATCH`): raise it before each release,
+  higher than the last one (the console's Releases tab, or ask). There's no `--version` flag.
 - Flags: `--data-note "Adds 2 tables"` (describes migrations), `--security` (forced on manual updaters after 14
   days), `--allow-destructive "<why>"` only when the user confirms a non-additive migration is safe.
 - From a developer, the first release and any release whose `sleeksky.json` changes (anything but `release`) is
